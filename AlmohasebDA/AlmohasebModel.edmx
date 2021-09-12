@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AlmohasebSQLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="The_Barcode">
+          <Key>
+            <PropertyRef Name="Bar_No" />
+          </Key>
+          <Property Name="Bar_No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Item_No" Type="int" />
+          <Property Name="Barcode" Type="nvarchar" MaxLength="30" />
+          <Property Name="Unit_No" Type="int" />
+        </EntityType>
+        <EntityType Name="The_ItemDetails">
+          <Key>
+            <PropertyRef Name="ItemDetails_No" />
+          </Key>
+          <Property Name="ItemDetails_No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Item_No" Type="int" />
+          <Property Name="Item_Quantity" Type="real" />
+          <Property Name="Item_Reserved" Type="real" />
+          <Property Name="Item_Cost" Type="money" />
+          <Property Name="PlaceExchange_No" Type="int" />
+          <Property Name="PlaceOffer_No" Type="int" />
+          <Property Name="Last_Movement" Type="datetime" />
+          <Property Name="Exp_date" Type="datetime" />
+          <Property Name="Item_Add" Type="datetime" />
+          <Property Name="LocalHostName" Type="nvarchar" MaxLength="255" />
+          <Property Name="NewItem_Add" Type="nvarchar" MaxLength="100" />
+          <Property Name="price" Type="money" />
+        </EntityType>
+        <EntityType Name="The_Items">
+          <Key>
+            <PropertyRef Name="Item_No" />
+          </Key>
+          <Property Name="Item_No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Scientific_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Out_quantitative" Type="real" />
+          <Property Name="Type_validity" Type="bit" Nullable="false" />
+          <Property Name="Redial" Type="real" />
+          <Property Name="Item_Status" Type="bit" Nullable="false" />
+          <Property Name="Item_kind" Type="smallint" />
+          <Property Name="FormPackaging_No" Type="int" />
+          <Property Name="Group_No" Type="int" />
+          <Property Name="Last_Movement" Type="datetime" />
+          <Property Name="Item_Add" Type="datetime" />
+          <Property Name="LocalHostName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Item_Sn" Type="bit" Nullable="false" />
+          <Property Name="Bar_Print" Type="bit" Nullable="false" />
+          <Property Name="Person_No" Type="int" />
+          <Property Name="NewItem_Add" Type="nvarchar" MaxLength="100" />
+          <Property Name="Show_menu" Type="bit" Nullable="false" />
+          <Property Name="Quntity_Rounded" Type="bit" Nullable="false" />
+          <Property Name="Old_Unit" Type="real" />
+          <Property Name="Nesba" Type="real" />
+        </EntityType>
+        <EntityType Name="The_Permissions">
+          <Key>
+            <PropertyRef Name="Permissions_No" />
+          </Key>
+          <Property Name="Permissions_No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Person_No" Type="int" />
+          <Property Name="See_Price" Type="bit" Nullable="false" />
+          <Property Name="Change_Users" Type="bit" Nullable="false" />
+          <Property Name="Change_Settings" Type="bit" Nullable="false" />
+          <Property Name="Modify_Payment" Type="bit" Nullable="false" />
+          <Property Name="Registration_Expenses" Type="bit" Nullable="false" />
+          <Property Name="Showing_Income" Type="bit" Nullable="false" />
+          <Property Name="Returns" Type="bit" Nullable="false" />
+          <Property Name="Show_Profit" Type="bit" Nullable="false" />
+          <Property Name="Price_Adjustment" Type="bit" Nullable="false" />
+          <Property Name="Storage_Display" Type="bit" Nullable="false" />
+          <Property Name="Sales_List" Type="bit" />
+          <Property Name="Free" Type="bit" />
+          <Property Name="Free1" Type="bit" />
+          <Property Name="Free2" Type="bit" />
+        </EntityType>
+        <Association Name="The_Barcode_FK00">
+          <End Role="The_Items" Type="Self.The_Items" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="The_Barcode" Type="Self.The_Barcode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="The_Items">
+              <PropertyRef Name="Item_No" />
+            </Principal>
+            <Dependent Role="The_Barcode">
+              <PropertyRef Name="Item_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="The_ItemDetails_FK00">
+          <End Role="The_Items" Type="Self.The_Items" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="The_ItemDetails" Type="Self.The_ItemDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="The_Items">
+              <PropertyRef Name="Item_No" />
+            </Principal>
+            <Dependent Role="The_ItemDetails">
+              <PropertyRef Name="Item_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AlmohasebSQLModelStoreContainer">
+          <EntitySet Name="The_Barcode" EntityType="Self.The_Barcode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="The_ItemDetails" EntityType="Self.The_ItemDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="The_Items" EntityType="Self.The_Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="The_Permissions" EntityType="Self.The_Permissions" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="The_Barcode_FK00" Association="Self.The_Barcode_FK00">
+            <End Role="The_Items" EntitySet="The_Items" />
+            <End Role="The_Barcode" EntitySet="The_Barcode" />
+          </AssociationSet>
+          <AssociationSet Name="The_ItemDetails_FK00" Association="Self.The_ItemDetails_FK00">
+            <End Role="The_Items" EntitySet="The_Items" />
+            <End Role="The_ItemDetails" EntitySet="The_ItemDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AlmohasebSQLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="The_Barcode">
+          <Key>
+            <PropertyRef Name="Bar_No" />
+          </Key>
+          <Property Name="Bar_No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Item_No" Type="Int32" />
+          <Property Name="Barcode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Unit_No" Type="Int32" />
+          <NavigationProperty Name="The_Items" Relationship="Self.The_Barcode_FK00" FromRole="The_Barcode" ToRole="The_Items" />
+        </EntityType>
+        <EntityType Name="The_ItemDetails">
+          <Key>
+            <PropertyRef Name="ItemDetails_No" />
+          </Key>
+          <Property Name="ItemDetails_No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Item_No" Type="Int32" />
+          <Property Name="Item_Quantity" Type="Single" />
+          <Property Name="Item_Reserved" Type="Single" />
+          <Property Name="Item_Cost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PlaceExchange_No" Type="Int32" />
+          <Property Name="PlaceOffer_No" Type="Int32" />
+          <Property Name="Last_Movement" Type="DateTime" Precision="3" />
+          <Property Name="Exp_date" Type="DateTime" Precision="3" />
+          <Property Name="Item_Add" Type="DateTime" Precision="3" />
+          <Property Name="LocalHostName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NewItem_Add" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="The_Items" Relationship="Self.The_ItemDetails_FK00" FromRole="The_ItemDetails" ToRole="The_Items" />
+        </EntityType>
+        <EntityType Name="The_Items">
+          <Key>
+            <PropertyRef Name="Item_No" />
+          </Key>
+          <Property Name="Item_No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Scientific_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Out_quantitative" Type="Single" />
+          <Property Name="Type_validity" Type="Boolean" Nullable="false" />
+          <Property Name="Redial" Type="Single" />
+          <Property Name="Item_Status" Type="Boolean" Nullable="false" />
+          <Property Name="Item_kind" Type="Int16" />
+          <Property Name="FormPackaging_No" Type="Int32" />
+          <Property Name="Group_No" Type="Int32" />
+          <Property Name="Last_Movement" Type="DateTime" Precision="3" />
+          <Property Name="Item_Add" Type="DateTime" Precision="3" />
+          <Property Name="LocalHostName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Item_Sn" Type="Boolean" Nullable="false" />
+          <Property Name="Bar_Print" Type="Boolean" Nullable="false" />
+          <Property Name="Person_No" Type="Int32" />
+          <Property Name="NewItem_Add" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Show_menu" Type="Boolean" Nullable="false" />
+          <Property Name="Quntity_Rounded" Type="Boolean" Nullable="false" />
+          <Property Name="Old_Unit" Type="Single" />
+          <Property Name="Nesba" Type="Single" />
+          <NavigationProperty Name="The_Barcode" Relationship="Self.The_Barcode_FK00" FromRole="The_Items" ToRole="The_Barcode" />
+          <NavigationProperty Name="The_ItemDetails" Relationship="Self.The_ItemDetails_FK00" FromRole="The_Items" ToRole="The_ItemDetails" />
+        </EntityType>
+        <Association Name="The_Barcode_FK00">
+          <End Role="The_Items" Type="Self.The_Items" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="The_Barcode" Type="Self.The_Barcode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="The_Items">
+              <PropertyRef Name="Item_No" />
+            </Principal>
+            <Dependent Role="The_Barcode">
+              <PropertyRef Name="Item_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="The_ItemDetails_FK00">
+          <End Role="The_Items" Type="Self.The_Items" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="The_ItemDetails" Type="Self.The_ItemDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="The_Items">
+              <PropertyRef Name="Item_No" />
+            </Principal>
+            <Dependent Role="The_ItemDetails">
+              <PropertyRef Name="Item_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AlmohasebSQLEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="The_Barcode" EntityType="Self.The_Barcode" />
+          <EntitySet Name="The_ItemDetails" EntityType="Self.The_ItemDetails" />
+          <EntitySet Name="The_Items" EntityType="Self.The_Items" />
+          <AssociationSet Name="The_Barcode_FK00" Association="Self.The_Barcode_FK00">
+            <End Role="The_Items" EntitySet="The_Items" />
+            <End Role="The_Barcode" EntitySet="The_Barcode" />
+          </AssociationSet>
+          <AssociationSet Name="The_ItemDetails_FK00" Association="Self.The_ItemDetails_FK00">
+            <End Role="The_Items" EntitySet="The_Items" />
+            <End Role="The_ItemDetails" EntitySet="The_ItemDetails" />
+          </AssociationSet>
+          <EntitySet Name="The_Permissions" EntityType="AlmohasebSQLModel.The_Permissions" />
+        </EntityContainer>
+        <EntityType Name="The_Permissions">
+          <Key>
+            <PropertyRef Name="Permissions_No" />
+          </Key>
+          <Property Name="Permissions_No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Person_No" Type="Int32" />
+          <Property Name="See_Price" Type="Boolean" Nullable="false" />
+          <Property Name="Change_Users" Type="Boolean" Nullable="false" />
+          <Property Name="Change_Settings" Type="Boolean" Nullable="false" />
+          <Property Name="Modify_Payment" Type="Boolean" Nullable="false" />
+          <Property Name="Registration_Expenses" Type="Boolean" Nullable="false" />
+          <Property Name="Showing_Income" Type="Boolean" Nullable="false" />
+          <Property Name="Returns" Type="Boolean" Nullable="false" />
+          <Property Name="Show_Profit" Type="Boolean" Nullable="false" />
+          <Property Name="Price_Adjustment" Type="Boolean" Nullable="false" />
+          <Property Name="Storage_Display" Type="Boolean" Nullable="false" />
+          <Property Name="Sales_List" Type="Boolean" />
+          <Property Name="Free" Type="Boolean" />
+          <Property Name="Free1" Type="Boolean" />
+          <Property Name="Free2" Type="Boolean" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AlmohasebSQLModelStoreContainer" CdmEntityContainer="AlmohasebSQLEntities">
+          <EntitySetMapping Name="The_Barcode">
+            <EntityTypeMapping TypeName="AlmohasebSQLModel.The_Barcode">
+              <MappingFragment StoreEntitySet="The_Barcode">
+                <ScalarProperty Name="Bar_No" ColumnName="Bar_No" />
+                <ScalarProperty Name="Item_No" ColumnName="Item_No" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="Unit_No" ColumnName="Unit_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="The_ItemDetails">
+            <EntityTypeMapping TypeName="AlmohasebSQLModel.The_ItemDetails">
+              <MappingFragment StoreEntitySet="The_ItemDetails">
+                <ScalarProperty Name="ItemDetails_No" ColumnName="ItemDetails_No" />
+                <ScalarProperty Name="Item_No" ColumnName="Item_No" />
+                <ScalarProperty Name="Item_Quantity" ColumnName="Item_Quantity" />
+                <ScalarProperty Name="Item_Reserved" ColumnName="Item_Reserved" />
+                <ScalarProperty Name="Item_Cost" ColumnName="Item_Cost" />
+                <ScalarProperty Name="PlaceExchange_No" ColumnName="PlaceExchange_No" />
+                <ScalarProperty Name="PlaceOffer_No" ColumnName="PlaceOffer_No" />
+                <ScalarProperty Name="Last_Movement" ColumnName="Last_Movement" />
+                <ScalarProperty Name="Exp_date" ColumnName="Exp_date" />
+                <ScalarProperty Name="Item_Add" ColumnName="Item_Add" />
+                <ScalarProperty Name="LocalHostName" ColumnName="LocalHostName" />
+                <ScalarProperty Name="NewItem_Add" ColumnName="NewItem_Add" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="The_Items">
+            <EntityTypeMapping TypeName="AlmohasebSQLModel.The_Items">
+              <MappingFragment StoreEntitySet="The_Items">
+                <ScalarProperty Name="Item_No" ColumnName="Item_No" />
+                <ScalarProperty Name="Scientific_Name" ColumnName="Scientific_Name" />
+                <ScalarProperty Name="Out_quantitative" ColumnName="Out_quantitative" />
+                <ScalarProperty Name="Type_validity" ColumnName="Type_validity" />
+                <ScalarProperty Name="Redial" ColumnName="Redial" />
+                <ScalarProperty Name="Item_Status" ColumnName="Item_Status" />
+                <ScalarProperty Name="Item_kind" ColumnName="Item_kind" />
+                <ScalarProperty Name="FormPackaging_No" ColumnName="FormPackaging_No" />
+                <ScalarProperty Name="Group_No" ColumnName="Group_No" />
+                <ScalarProperty Name="Last_Movement" ColumnName="Last_Movement" />
+                <ScalarProperty Name="Item_Add" ColumnName="Item_Add" />
+                <ScalarProperty Name="LocalHostName" ColumnName="LocalHostName" />
+                <ScalarProperty Name="Item_Sn" ColumnName="Item_Sn" />
+                <ScalarProperty Name="Bar_Print" ColumnName="Bar_Print" />
+                <ScalarProperty Name="Person_No" ColumnName="Person_No" />
+                <ScalarProperty Name="NewItem_Add" ColumnName="NewItem_Add" />
+                <ScalarProperty Name="Show_menu" ColumnName="Show_menu" />
+                <ScalarProperty Name="Quntity_Rounded" ColumnName="Quntity_Rounded" />
+                <ScalarProperty Name="Old_Unit" ColumnName="Old_Unit" />
+                <ScalarProperty Name="Nesba" ColumnName="Nesba" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="The_Permissions">
+            <EntityTypeMapping TypeName="AlmohasebSQLModel.The_Permissions">
+              <MappingFragment StoreEntitySet="The_Permissions">
+                <ScalarProperty Name="Free2" ColumnName="Free2" />
+                <ScalarProperty Name="Free1" ColumnName="Free1" />
+                <ScalarProperty Name="Free" ColumnName="Free" />
+                <ScalarProperty Name="Sales_List" ColumnName="Sales_List" />
+                <ScalarProperty Name="Storage_Display" ColumnName="Storage_Display" />
+                <ScalarProperty Name="Price_Adjustment" ColumnName="Price_Adjustment" />
+                <ScalarProperty Name="Show_Profit" ColumnName="Show_Profit" />
+                <ScalarProperty Name="Returns" ColumnName="Returns" />
+                <ScalarProperty Name="Showing_Income" ColumnName="Showing_Income" />
+                <ScalarProperty Name="Registration_Expenses" ColumnName="Registration_Expenses" />
+                <ScalarProperty Name="Modify_Payment" ColumnName="Modify_Payment" />
+                <ScalarProperty Name="Change_Settings" ColumnName="Change_Settings" />
+                <ScalarProperty Name="Change_Users" ColumnName="Change_Users" />
+                <ScalarProperty Name="See_Price" ColumnName="See_Price" />
+                <ScalarProperty Name="Person_No" ColumnName="Person_No" />
+                <ScalarProperty Name="Permissions_No" ColumnName="Permissions_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

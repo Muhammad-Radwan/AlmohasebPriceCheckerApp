@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="626e3a489abd4bf28090d730fdb6fb96" Name="Diagram1" ZoomLevel="94">
+        <EntityTypeShape EntityType="AlmohasebSQLModel.The_Barcode" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlmohasebSQLModel.The_ItemDetails" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlmohasebSQLModel.The_Items" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="AlmohasebSQLModel.The_Barcode_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="AlmohasebSQLModel.The_ItemDetails_FK00" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AlmohasebSQLModel.The_Permissions" Width="1.5" PointX="5.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
